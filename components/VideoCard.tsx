@@ -1,4 +1,5 @@
 //import Link from 'next/link'
+import { View, Image, Text } from 'react-native';
 import { Link } from 'expo-router';
 import { useEffect, useMemo, useState } from "react"
 
@@ -28,59 +29,44 @@ export default function VideoCard(props: any) {
 
 
     return (
-        <div
+        <View
             className="video-card relative">
-            <div>
-                <div
+            <View>
+                <View
                     className="video-thumbnail relative">
-                    <a
-                        className="block"
-                        href={`https://youtu.be/${props.video.id}`}
-                        target="_blank"
-                    >
-                        <img
-                            className="rounded"
-                            src={`http://img.youtube.com/vi/${props.video.id}/maxresdefault.jpg`}
-                        ></img>
-                        <div
-                            className="video-topic absolute top-1 left-1 rounded-sm bg-black bg-opacity-80 text-white text-sm px-1 py-px">
-                            {props.video.topic_id}
-                        </div>
+                    <Image
+                        source={{ uri: `http://img.youtube.com/vi/${props.video.id}/maxresdefault.jpg` }}
+                        style={{ width: 400, height: 400 }}
+                    />
+                    <View
+                        className="video-topic absolute top-1 left-1 rounded-sm bg-black bg-opacity-80 text-white text-sm px-1 py-px">
+                        <Text>{props.video.topic_id}</Text>
+                    </View>
 
-                        {props.video.status === "live" ? <div
-                            className="video-live absolute bottom-1 right-1 rounded-sm bg-red-800 bg-opacity-80 text-white text-sm px-1 py-px">{liveDuration}</div> : ""}
+                    {props.video.status === "live" ? <View
+                        className="video-live absolute bottom-1 right-1 rounded-sm bg-red-800 bg-opacity-80 text-white text-sm px-1 py-px"><Text>{liveDuration}</Text></View> : <Text>""</Text>}
 
-                    </a>
-                </div>
+                </View>
 
-                <div className="video-text flex mt-2">
-                    <div className="flex-none p-2">
-                        <img
-                            className="rounded-full w-12 h-12"
-                            src={channelImg}
-                        ></img>
-                    </div>
-                    <div>
-                        <div className="max-h-10 leading-5 line-clamp-2">
-                            <Link href={`watch/${props.video.id}`}>{props.video.title}</Link>
-                        </div>
-                        <div>
-                            <a
-                                className="text-blue-400"
-                                target="_blank"
-                                href={`https://www.youtube.com/channel/${props.video.channel.id}`}>
-                                {props.video.channel.english_name}
-                            </a>
-                        </div>
-                        <div>
+                <View className="video-text flex mt-2">
+                    <View className="flex-none p-2">
+                        <Image
+                            source={channelImg}
+                        />
+                    </View>
+                    <View>
+                        <View className="max-h-10 leading-5 line-clamp-2">
+                            <Link href={`watch/${props.video.id}`}><Text>{props.video.title}</Text></Link>
+                        </View>
+                        <View>
                             {props.video.status === "live" ?
-                                <span><span className="text-red-500">Live Now</span> • {props.video.live_viewers} watching</span> :
-                                <span>Starts in {startsIn}</span>}
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <Text>Live Now • {props.video.live_viewers} watching</Text> :
+                                <Text>Starts in {startsIn}</Text>}
+                        </View>
+                    </View>
+                </View>
+            </View>
 
-        </div>
+        </View>
     )
 }
