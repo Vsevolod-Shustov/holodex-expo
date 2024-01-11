@@ -25,7 +25,7 @@ export default function VideoGrid({ videos }: { videos: Array<Video> }) {
   const data = videos;
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {data?.map((video: Video) => <VideoCard key={video.id} video={video}></VideoCard>)}
     </View>
   )

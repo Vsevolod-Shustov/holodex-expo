@@ -1,5 +1,5 @@
 //import Link from 'next/link'
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 import { useEffect, useMemo, useState } from "react"
 
@@ -8,6 +8,8 @@ export default function VideoCard(props: any) {
 
     const [liveDuration, setLiveDuration] = useState("")
     const [startsIn, setStartsIn] = useState("")
+
+    const thumb = `http://img.youtube.com/vi/${props.video.id}/maxresdefault.jpg`
 
     useEffect(() => {
         if (props.video.status === "live" && props.video.start_actual) {
@@ -29,40 +31,37 @@ export default function VideoCard(props: any) {
 
 
     return (
-        <View
-            className="video-card relative">
-            <View>
-                <View
-                    className="video-thumbnail relative">
-                    <Image
-                        source={{ uri: `http://img.youtube.com/vi/${props.video.id}/maxresdefault.jpg` }}
-                        style={{ width: 400, height: 400 }}
-                    />
-                    <View
-                        className="video-topic absolute top-1 left-1 rounded-sm bg-black bg-opacity-80 text-white text-sm px-1 py-px">
-                        <Text>{props.video.topic_id}</Text>
-                    </View>
-
-                    {props.video.status === "live" ? <View
-                        className="video-live absolute bottom-1 right-1 rounded-sm bg-red-800 bg-opacity-80 text-white text-sm px-1 py-px"><Text>{liveDuration}</Text></View> : <Text>""</Text>}
-
+        <View style={styles.card}>
+            <View style={styles.thumbnail_container}>
+                <Image
+                    resizeMode='contain'
+                    style={styles.thumbnail_image}
+                    source={{ uri: thumb }}
+                />
+                <View style={styles.video_topic}>
+                    <Text style={styles.video_topic_text}>{props.video.topic_id}</Text>
                 </View>
 
-                <View className="video-text flex mt-2">
-                    <View className="flex-none p-2">
-                        <Image
-                            source={channelImg}
-                        />
+                {props.video.status === "live" ? <View style={styles.live_duration}>
+                    <Text style={styles.live_duration_text}>{liveDuration}</Text>
+                </View> : <Text>""</Text>}
+
+            </View>
+
+            <View className="video-text flex mt-2">
+                <View className="flex-none p-2">
+                    <Image
+                        source={channelImg}
+                    />
+                </View>
+                <View>
+                    <View className="max-h-10 leading-5 line-clamp-2">
+                        <Link href={`watch/${props.video.id}`}><Text>{props.video.title}</Text></Link>
                     </View>
                     <View>
-                        <View className="max-h-10 leading-5 line-clamp-2">
-                            <Link href={`watch/${props.video.id}`}><Text>{props.video.title}</Text></Link>
-                        </View>
-                        <View>
-                            {props.video.status === "live" ?
-                                <Text>Live Now • {props.video.live_viewers} watching</Text> :
-                                <Text>Starts in {startsIn}</Text>}
-                        </View>
+                        {props.video.status === "live" ?
+                            <Text>Live Now • {props.video.live_viewers} watching</Text> :
+                            <Text>Starts in {startsIn}</Text>}
                     </View>
                 </View>
             </View>
@@ -70,3 +69,46 @@ export default function VideoCard(props: any) {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    card: {
+        position: 'relative',
+        width: '50%',
+        backgroundColor: 'green',
+        marginBottom: 8
+    },
+    thumbnail_container: {
+        position: 'relative',
+        maxWidth: '100%',
+    },
+    thumbnail_image: {
+        width: 1280,
+        height: 720,
+        aspectRatio: 16 / 9,
+        maxWidth: '100%'
+    },
+    video_topic: {
+        position: 'absolute',
+        top: 16,
+        left: 16,
+        borderRadius: 8,
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+    },
+    video_topic_text: {
+        color: 'white'
+    },
+    live_duration: {
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+        borderRadius: 8,
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+    },
+    live_duration_text: {
+        color: 'red'
+    }
+});

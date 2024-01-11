@@ -15,8 +15,8 @@ export async function getLiveData(queryOrg = "Hololive") {
       cache: 'no-store'
     });
     const live = await response.json();
-    console.log("data.ts: ");
-    console.log(live);
+    //console.log("data.ts: ");
+    //console.log(live[0]);
     return live;
   } catch (error) {
     console.log(error)
