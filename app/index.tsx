@@ -1,5 +1,6 @@
-import { Text, View, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 //import Videos from "@/components/Videos"
 import Videos from '@/components/Videos';
@@ -7,16 +8,8 @@ import Videos from '@/components/Videos';
 
 export default function Page() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Home page</Text>
+    <SafeAreaView>
       <Videos></Videos>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black'
-  },
-});

@@ -38,59 +38,71 @@ export default function VideoCard(props: any) {
                     style={styles.thumbnail_image}
                     source={{ uri: thumb }}
                 />
+
                 <View style={styles.video_topic}>
                     <Text style={styles.video_topic_text}>{props.video.topic_id}</Text>
                 </View>
 
                 {props.video.status === "live" ? <View style={styles.live_duration}>
                     <Text style={styles.live_duration_text}>{liveDuration}</Text>
-                </View> : <Text>""</Text>}
-
+                </View> : null}
             </View>
 
-            <View className="video-text flex mt-2">
-                <View className="flex-none p-2">
-                    <Image
-                        source={channelImg}
-                    />
-                </View>
+            <View style={{ flex: 1, flexDirection: 'row', marginTop: 8 }}>
+
                 <View>
-                    <View className="max-h-10 leading-5 line-clamp-2">
-                        <Link href={`watch/${props.video.id}`}><Text>{props.video.title}</Text></Link>
+                    <View>
+                        <Link numberOfLines={2} href={`watch/${props.video.id}`}><Text style={{ color: 'white' }}>{props.video.title}</Text></Link>
                     </View>
+
+                    <View>
+                        <Link href={`https://www.youtube.com/channel/${props.video.channel.id}`}><Text style={{ color: 'royalblue' }}>{props.video.channel.english_name}</Text></Link>
+                    </View>
+
                     <View>
                         {props.video.status === "live" ?
-                            <Text>Live Now • {props.video.live_viewers} watching</Text> :
-                            <Text>Starts in {startsIn}</Text>}
+                            <Text><Text style={{ color: 'red' }}>Live Now</Text><Text style={{ color: 'white' }}> • {props.video.live_viewers} watching</Text></Text> :
+                            <Text style={{ color: 'white' }}>Starts in {startsIn}</Text>}
                     </View>
+
+                    <Link href={{
+                        pathname: "/watch/[id]",
+                        params: { id: props.video.id }
+                    }}>
+
+                    </Link>
                 </View>
             </View>
 
         </View>
     )
+
+    const channelThumb = <View style={{ padding: 8 }}>
+        <Image
+            source={{ uri: channelImg }}
+            style={{ width: 50, height: 50, borderRadius: 25 }}
+        />
+    </View>
 }
 
 const styles = StyleSheet.create({
     card: {
         position: 'relative',
         width: '50%',
-        backgroundColor: 'green',
-        marginBottom: 8
+        padding: 12
     },
     thumbnail_container: {
         position: 'relative',
         maxWidth: '100%',
     },
     thumbnail_image: {
-        width: 1280,
-        height: 720,
         aspectRatio: 16 / 9,
         maxWidth: '100%'
     },
     video_topic: {
         position: 'absolute',
-        top: 16,
-        left: 16,
+        top: 8,
+        left: 8,
         borderRadius: 8,
         backgroundColor: 'rgba(0,0,0,0.8)',
         paddingHorizontal: 8,
@@ -101,8 +113,8 @@ const styles = StyleSheet.create({
     },
     live_duration: {
         position: 'absolute',
-        bottom: 16,
-        right: 16,
+        bottom: 8,
+        right: 8,
         borderRadius: 8,
         backgroundColor: 'rgba(0,0,0,0.8)',
         paddingHorizontal: 8,

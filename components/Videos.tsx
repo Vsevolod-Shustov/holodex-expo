@@ -22,8 +22,6 @@ export default function Videos() {
     getData()
   }, [org])
   return (
-    <>
-      <VideoGrid videos={liveData}></VideoGrid>
-    </>
+    <VideoGrid videos={liveData}></VideoGrid>
   )
 }

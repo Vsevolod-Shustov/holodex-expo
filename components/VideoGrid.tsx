@@ -1,5 +1,5 @@
 //import { useAtom } from 'jotai'
-import { View } from "react-native";
+import { View, FlatList } from "react-native";
 import VideoCard from "@/components/VideoCard";
 //import OrgSelectorDropdown from "@/components/OrgSelectorDropdown";
 //import { liveData, getLiveData } from "@/app/lib/data";
@@ -25,8 +25,11 @@ export default function VideoGrid({ videos }: { videos: Array<Video> }) {
   const data = videos;
 
   return (
-    <View style={{ flex: 1 }}>
-      {data?.map((video: Video) => <VideoCard key={video.id} video={video}></VideoCard>)}
-    </View>
+    <FlatList
+      data={videos}
+      renderItem={({ item }) => <VideoCard video={item}></VideoCard>}
+      keyExtractor={item => item.id}
+      numColumns={2}
+    />
   )
 }
