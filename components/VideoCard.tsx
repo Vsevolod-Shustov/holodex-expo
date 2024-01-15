@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
     card: {
         position: 'relative',
         width: '50%',
-        padding: 12
+        padding: 12,
+        paddingBottom: 0
     },
     thumbnail_container: {
         position: 'relative',
