@@ -32,6 +32,7 @@ export default function VideoCard(props: any) {
 
     return (
         <View style={styles.card}>
+
             <View style={styles.thumbnail_container}>
                 <Image
                     resizeMode='contain'
@@ -39,24 +40,29 @@ export default function VideoCard(props: any) {
                     source={{ uri: thumb }}
                 />
 
-                <View style={styles.video_topic}>
-                    <Text style={styles.video_topic_text}>{props.video.topic_id}</Text>
-                </View>
+                {props.video.topic_id ?
+                    <View style={styles.video_topic}>
+                        <Text style={styles.video_topic_text}>{props.video.topic_id}</Text>
+                    </View> : null}
 
-                {props.video.status === "live" ? <View style={styles.live_duration}>
-                    <Text style={styles.live_duration_text}>{liveDuration}</Text>
-                </View> : null}
+                {props.video.status === "live" ?
+                    <View style={styles.live_duration}>
+                        <Text style={styles.live_duration_text}>{liveDuration}</Text>
+                    </View> : null}
+
+                <Link style={styles.thumbnail_link} href={`https://www.youtube.com/watch/${props.video.id}`}></Link>
             </View>
+
 
             <View style={{ flex: 1, flexDirection: 'row', marginTop: 8 }}>
 
-                <View>
-                    <View>
+                <View style={{ maxWidth: '100%' }}>
+                    <View style={{ maxWidth: '100%' }}>
                         <Link numberOfLines={2} href={`https://www.youtube.com/watch/${props.video.id}`}><Text style={{ color: 'white' }}>{props.video.title}</Text></Link>
                     </View>
 
                     <View>
-                        <Link href={`https://www.youtube.com/channel/${props.video.channel.id}`}><Text style={{ color: 'royalblue' }}>{props.video.channel.english_name}</Text></Link>
+                        <Link numberOfLines={1} href={`https://www.youtube.com/channel/${props.video.channel.id}`}><Text style={{ color: 'royalblue' }}>{props.video.channel.english_name}</Text></Link>
                     </View>
 
                     <View>
@@ -67,7 +73,7 @@ export default function VideoCard(props: any) {
                 </View>
             </View>
 
-        </View>
+        </View >
     )
 
     const channelThumb = <View style={{ padding: 8 }}>
@@ -91,7 +97,13 @@ const styles = StyleSheet.create({
     },
     thumbnail_image: {
         aspectRatio: 16 / 9,
-        maxWidth: '100%'
+        maxWidth: '100%',
+        borderRadius: 8
+    },
+    thumbnail_link: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%'
     },
     video_topic: {
         position: 'absolute',
@@ -103,7 +115,8 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
     },
     video_topic_text: {
-        color: 'white'
+        color: 'white',
+        fontSize: 12
     },
     live_duration: {
         position: 'absolute',
@@ -115,6 +128,7 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
     },
     live_duration_text: {
-        color: 'red'
+        color: 'red',
+        fontSize: 12
     }
 });
