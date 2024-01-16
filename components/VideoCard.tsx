@@ -52,7 +52,7 @@ export default function VideoCard(props: any) {
 
                 <View>
                     <View>
-                        <Link numberOfLines={2} href={`watch/${props.video.id}`}><Text style={{ color: 'white' }}>{props.video.title}</Text></Link>
+                        <Link numberOfLines={2} href={`https://www.youtube.com/watch/${props.video.id}`}><Text style={{ color: 'white' }}>{props.video.title}</Text></Link>
                     </View>
 
                     <View>
@@ -64,13 +64,6 @@ export default function VideoCard(props: any) {
                             <Text><Text style={{ color: 'red' }}>Live Now</Text><Text style={{ color: 'white' }}> • {props.video.live_viewers} watching</Text></Text> :
                             <Text style={{ color: 'white' }}>Starts in {startsIn}</Text>}
                     </View>
-
-                    <Link href={{
-                        pathname: "/watch/[id]",
-                        params: { id: props.video.id }
-                    }}>
-
-                    </Link>
                 </View>
             </View>
 
