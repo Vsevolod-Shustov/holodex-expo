@@ -1,5 +1,5 @@
 //import Link from 'next/link'
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 import { useEffect, useMemo, useState } from "react"
 
@@ -34,11 +34,15 @@ export default function VideoCard(props: any) {
         <View style={styles.card}>
 
             <View style={styles.thumbnail_container}>
-                <Image
-                    resizeMode='contain'
-                    style={styles.thumbnail_image}
-                    source={{ uri: thumb }}
-                />
+                <Link asChild href={`https://www.youtube.com/watch/${props.video.id}`}>
+                    <Pressable>
+                        <Image
+                            resizeMode='contain'
+                            style={styles.thumbnail_image}
+                            source={{ uri: thumb }}
+                        />
+                    </Pressable>
+                </Link>
 
                 {props.video.topic_id ?
                     <View style={styles.video_topic}>
