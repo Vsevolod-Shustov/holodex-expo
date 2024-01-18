@@ -4,12 +4,15 @@ import { Link } from 'expo-router';
 import { useEffect, useMemo, useState } from "react"
 
 export default function VideoCard(props: any) {
+    //console.log("render")
     const channelImg = useMemo(() => props.video.channel.photo.replace("=s800", "=s48"), [props.video.channel.photo])
 
     const [liveDuration, setLiveDuration] = useState("")
     const [startsIn, setStartsIn] = useState("")
 
     const thumb = `http://img.youtube.com/vi/${props.video.id}/maxresdefault.jpg`
+
+    const cardWidth = `${100 / props.numberOfColumns}%`
 
     useEffect(() => {
         if (props.video.status === "live" && props.video.start_actual) {
@@ -31,7 +34,7 @@ export default function VideoCard(props: any) {
 
 
     return (
-        <View style={styles.card}>
+        <View style={{ ...styles.card, width: cardWidth }}>
 
             <View style={styles.thumbnail_container}>
                 <Link asChild href={`https://www.youtube.com/watch/${props.video.id}`}>
@@ -89,7 +92,6 @@ export default function VideoCard(props: any) {
 const styles = StyleSheet.create({
     card: {
         position: 'relative',
-        width: '50%',
         padding: 12,
         paddingBottom: 0
     },
