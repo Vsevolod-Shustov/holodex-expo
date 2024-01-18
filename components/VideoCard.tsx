@@ -53,8 +53,6 @@ export default function VideoCard(props: any) {
                     <View style={styles.live_duration}>
                         <Text style={styles.live_duration_text}>{liveDuration}</Text>
                     </View> : null}
-
-                <Link style={styles.thumbnail_link} href={`https://www.youtube.com/watch/${props.video.id}`}></Link>
             </View>
 
 
@@ -103,11 +101,6 @@ const styles = StyleSheet.create({
         aspectRatio: 16 / 9,
         maxWidth: '100%',
         borderRadius: 8
-    },
-    thumbnail_link: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%'
     },
     video_topic: {
         position: 'absolute',
