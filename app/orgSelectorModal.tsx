@@ -1,6 +1,7 @@
 import { View, Text, Button, Pressable, StyleSheet } from 'react-native';
 import { Link, router, Stack } from 'expo-router';
-import { atom, useAtom } from "jotai"
+import { useAtom } from "jotai"
+import { queryOrg } from '@/lib/data';
 
 const items = [
   { title: "All Vtubers", value: "All" },
@@ -8,8 +9,6 @@ const items = [
   { title: "Hololive", value: "Hololive" },
   { title: "Nijisanji", value: "Nijisanji" },
 ]
-
-export const queryOrg = atom<string>("Hololive")
 
 export default function OrgSelectorModal() {
   const isPresented = router.canGoBack();

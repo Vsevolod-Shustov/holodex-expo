@@ -1,8 +1,12 @@
+import { atom } from "jotai"
+
 const HOLODEX_API_KEY = "af406626-bc8d-4140-977c-2341a5def331"
 const apiUrl = "https://holodex.net/api/v2/live"
 //export const queryOrg = "Hololive"
 
-export async function getLiveData(queryOrg = "Hololive") {
+export const queryOrg = atom<string>("Hololive")
+
+export async function getLiveData(queryOrg) {
   try {
     let fetchUrl = new URL(apiUrl)
     const org = queryOrg
