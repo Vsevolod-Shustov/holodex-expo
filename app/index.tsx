@@ -3,7 +3,6 @@ import Videos from '@/components/Videos';
 import IndexHeaderButtons from '@/components/IndexHeaderButtons';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { Link, Stack } from 'expo-router';
-import { useContext } from 'react';
 
 export default function Page() {
   return (
