@@ -14,6 +14,7 @@ import { getLiveData } from '@/lib/data';
 
 export default function Videos() {
   const [org] = useAtom(queryOrg);
+  //console.log("videos.tsx queryOrg: " + org)
   const [liveData, setLiveData] = useState(null);
   useEffect(() => {
     const getData = async () => {

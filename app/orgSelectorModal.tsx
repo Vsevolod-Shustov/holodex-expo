@@ -1,7 +1,7 @@
 import { View, Text, Button, Pressable, StyleSheet } from 'react-native';
 import { Link, router, Stack } from 'expo-router';
 import { useAtom } from "jotai"
-import { queryOrg } from '@/lib/data';
+import { queryOrg, saveToStorage } from '@/lib/data';
 
 const items = [
   { title: "All Vtubers", value: "All" },
@@ -28,7 +28,11 @@ export default function OrgSelectorModal() {
           <Pressable
             key={item.value}
             style={styles.button}
-            onPress={() => { console.log(item.value); setOrg(item.value) }}
+            onPress={() => {
+              console.log("org selector changed to:" + item.value);
+              setOrg(item.value);
+              saveToStorage("queryOrg", item.value);
+            }}
           >
             <Text style={styles.buttonText}>{item.value}</Text>
           </Pressable>

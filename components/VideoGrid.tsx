@@ -27,8 +27,8 @@ export default function VideoGrid({ videos }: { videos: Array<Video> }) {
   const { width } = useWindowDimensions();
   const numberOfColumns = Math.ceil(width / 320);
 
-  console.log("window width: " + width);
-  console.log("numberOfColumns: " + numberOfColumns)
+  //console.log("window width: " + width);
+  //console.log("numberOfColumns: " + numberOfColumns)
 
   return (
     <FlatList

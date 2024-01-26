@@ -4,6 +4,7 @@ import IndexHeaderButtons from '@/components/IndexHeaderButtons';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { Link, Stack } from 'expo-router';
 
+
 export default function Page() {
   return (
     <View style={styles.container}>
