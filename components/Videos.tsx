@@ -21,13 +21,14 @@ export default function Videos() {
       const data = await getLiveData(org)
       setLiveData(data)
     }
-
-    getData()
+    if (org !== null) {
+      getData()
+    }
   }, [org])
   return (
     <>
-      <Text style={{ color: 'red' }}>current org: {org}</Text>
-      <VideoGrid videos={liveData}></VideoGrid>
+      <Text style={{ color: 'red' }}>current org (jotai): {org}</Text>
+      {org ? <VideoGrid videos={liveData}></VideoGrid> : <Text>Loading</Text>}
     </>
   )
 }

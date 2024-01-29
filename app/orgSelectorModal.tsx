@@ -22,14 +22,14 @@ export default function OrgSelectorModal() {
             !isPresented && <Link href="../">Dismiss</Link>,
         }}
       />
-      <Text style={{ color: 'red' }}>current org: {org}</Text>
+      <Text style={{ color: 'red' }}>current org (jotai): {org}</Text>
       <View>
         {items.map((item) => (
           <Pressable
             key={item.value}
             style={styles.button}
             onPress={() => {
-              console.log("org selector changed to:" + item.value);
+              console.log("org selector changed to: " + item.value);
               setOrg(item.value);
               saveToStorage("queryOrg", item.value);
             }}
