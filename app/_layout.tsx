@@ -13,7 +13,8 @@ export default function HomeLayout() {
         setOrg(storedOrg)
         console.log("_layout.tsx: setting org to " + storedOrg)
       } else {
-        console.log("_layout.tsx: no stored org")
+        setOrg("Hololive")
+        console.log("_layout.tsx: no stored org, setting to Hololive")
       }
     }
     resolveOrg().catch(console.error)
