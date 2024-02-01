@@ -2,8 +2,15 @@
 import { View, Image, Text, StyleSheet, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 import { useEffect, useMemo, useState } from "react"
+import { useTheme } from '@react-navigation/native';
 
 export default function VideoCard(props: any) {
+    const { colors } = useTheme();
+    const themestyles = StyleSheet.create({
+        text: {
+            color: colors.text,
+        },
+    });
     //console.log("render")
     const channelImg = useMemo(() => props.video.channel.photo.replace("=s800", "=s48"), [props.video.channel.photo])
 
@@ -49,7 +56,7 @@ export default function VideoCard(props: any) {
 
                 {props.video.topic_id ?
                     <View style={styles.video_topic}>
-                        <Text style={styles.video_topic_text}>{props.video.topic_id}</Text>
+                        <Text style={{ color: '#e5e5e7', fontSize: 12 }}>{props.video.topic_id}</Text>
                     </View> : null}
 
                 {props.video.status === "live" ?
@@ -63,7 +70,7 @@ export default function VideoCard(props: any) {
 
                 <View style={{ maxWidth: '100%' }}>
                     <View style={{ maxWidth: '100%' }}>
-                        <Link numberOfLines={2} href={`https://www.youtube.com/watch/${props.video.id}`}><Text style={{ color: 'white' }}>{props.video.title}</Text></Link>
+                        <Link numberOfLines={2} href={`https://www.youtube.com/watch/${props.video.id}`}><Text style={themestyles.text}>{props.video.title}</Text></Link>
                     </View>
 
                     <View>
@@ -72,8 +79,8 @@ export default function VideoCard(props: any) {
 
                     <View>
                         {props.video.status === "live" ?
-                            <Text><Text style={{ color: 'red' }}>Live Now</Text><Text style={{ color: 'white' }}> • {props.video.live_viewers} watching</Text></Text> :
-                            <Text style={{ color: 'white' }}>Starts in {startsIn}</Text>}
+                            <Text><Text style={{ color: 'red' }}>Live Now</Text><Text style={themestyles.text}> • {props.video.live_viewers} watching</Text></Text> :
+                            <Text style={themestyles.text}>Starts in {startsIn}</Text>}
                     </View>
                 </View>
             </View>
