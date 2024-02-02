@@ -6,8 +6,8 @@ import ThemeSwitcher from "@/components/ThemeSwitcher";
 export default function IndexHeaderButtons() {
   return (
     <>
-      <OrgSelector></OrgSelector>
       <ThemeSwitcher></ThemeSwitcher>
+      <OrgSelector></OrgSelector>
     </>
   )
 }
