@@ -2,6 +2,9 @@ import { atom } from "jotai"
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from "react-native";
 
+const HOLODEX_API_KEY = "af406626-bc8d-4140-977c-2341a5def331"
+const apiUrl = "https://holodex.net/api/v2/live"
+
 export async function saveToStorage(key, value) {
   if (Platform.OS !== "web") {
     await SecureStore.setItemAsync(key, value);
@@ -25,8 +28,16 @@ export async function loadFromStorage(key: string) {
   }
 }
 
-const HOLODEX_API_KEY = "af406626-bc8d-4140-977c-2341a5def331"
-const apiUrl = "https://holodex.net/api/v2/live"
+export async function loadAtomFromStorage(key, setAtom, def) {
+  const storedValue = await loadFromStorage(key)
+  if (storedValue) {
+    setAtom(storedValue)
+    console.log(`_layout.tsx: setting ${key} to ` + storedValue)
+  } else {
+    setAtom(def)
+    console.log(`_layout.tsx: no stored ${key}, setting to ${def}`)
+  }
+}
 
 export const queryOrg = atom<string | null>(null)
 

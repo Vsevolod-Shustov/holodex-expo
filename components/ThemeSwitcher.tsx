@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { ThemeContext } from "@/app/_layout";
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
+import { saveToStorage } from "@/lib/data";
 
 export default function ThemeSwitcher() {
   const { setTheme, theme } = useContext(ThemeContext);
@@ -18,7 +19,11 @@ export default function ThemeSwitcher() {
   return (
     <Pressable
       style={styles.button}
-      onPress={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      onPress={() => {
+        const themeToSet = theme === 'light' ? 'dark' : 'light'
+        setTheme(themeToSet)
+        saveToStorage('theme', themeToSet)
+      }}
     >
       <MaterialCommunityIcons style={{ ...styles.moon, ...themestyles.text, ...(theme === 'light' ? styles.inactive : "") }} name="moon-waning-crescent" size={24} color="black" />
       <Feather style={{ ...styles.sun, ...themestyles.text, ...(theme === 'dark' ? styles.inactive : "") }} name="sun" size={16} color="black" />

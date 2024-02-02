@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import { View, StyleSheet, useWindowDimensions } from 'react-native';
 import { useAtom } from "jotai"
-import { queryOrg, saveToStorage, loadFromStorage } from '@/lib/data';
+import { queryOrg, saveToStorage, loadFromStorage, loadAtomFromStorage } from '@/lib/data';
 import { useEffect } from 'react';
 import { ThemeProvider, DarkTheme, DefaultTheme, useTheme } from '@react-navigation/native';
 import { createContext, useState } from 'react';
@@ -16,16 +16,16 @@ export default function HomeLayout() {
 
   useEffect(() => {
     const resolveOrg = async () => {
-      const storedOrg = await loadFromStorage("queryOrg")
-      if (storedOrg) {
-        setOrg(storedOrg)
-        console.log("_layout.tsx: setting org to " + storedOrg)
-      } else {
-        setOrg("Hololive")
-        console.log("_layout.tsx: no stored org, setting to Hololive")
-      }
+      await loadAtomFromStorage('queryOrg', setOrg, 'Hololive').catch(console.error)
     }
     resolveOrg().catch(console.error)
+  }, [])
+
+  useEffect(() => {
+    const resolveTheme = async () => {
+      await loadAtomFromStorage('theme', setTheme, 'dark').catch(console.error)
+    }
+    resolveTheme().catch(console.error)
   }, [])
   //const { width, height, scale, fontScale } = useWindowDimensions();
   // console.log("window width: " + width);
