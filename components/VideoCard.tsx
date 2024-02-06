@@ -1,8 +1,9 @@
 //import Link from 'next/link'
-import { View, Image, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 import { useEffect, useMemo, useState } from "react"
 import { useTheme } from '@react-navigation/native';
+import { Image } from 'expo-image';
 
 export default function VideoCard(props: any) {
     const { colors } = useTheme();
@@ -47,7 +48,7 @@ export default function VideoCard(props: any) {
                 <Link asChild href={`https://www.youtube.com/watch/${props.video.id}`}>
                     <Pressable>
                         <Image
-                            resizeMode='contain'
+                            contentFit="contain"
                             style={styles.thumbnail_image}
                             source={{ uri: thumb }}
                         />

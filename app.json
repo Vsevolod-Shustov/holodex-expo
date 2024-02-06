@@ -22,7 +22,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.vsevolodshustov.holodexexpo"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -34,6 +35,15 @@
     ],
     "experiments": {
       "tsconfigPaths": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e975d807-4ca4-4230-b314-c4ccd223184d"
+      }
+    },
+    "owner": "vsevolod-shustov"
   }
 }
